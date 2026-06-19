@@ -60,7 +60,7 @@ O toggle (`#themeToggle`, `.theme-toggle`, com `aria-pressed`) alterna `data-the
 
 ### 2.2 Cores institucionais (brand) — base imutável
 
-7 cores do brandbook Facial Academy 2022. Nada deve sair daqui.
+7 cores institucionais da marca. Nada deve sair daqui.
 
 | Token | Hex | Papel |
 |---|---|---|
@@ -87,8 +87,21 @@ Os `--brand-*` **não** mudam entre temas; os tokens de tema abaixo é que deriv
 | `--mut` | `#C2BAD0` | `#6B5C87` | texto secundário |
 | `--legal-mut` | `#826DAD` | `#6B5C87` | texto legal/rodapé |
 | `--roxo` | `#3A274F` | `#3A274F` | roxo profundo (gradiente) |
-| `--roxo2` | `#644389` | `#644389` | primária (fill/seleção) |
-| `--roxo-bright` | `#7C5EA7` | `#7C5EA7` | hover sólido |
+| `--roxo2` | `#644389` | `#644389` | primária (seleção, dia/linha selecionada) |
+| `--roxo-bright` | `#7C5EA7` | `#7C5EA7` | roxo claro (base do `--cta` escuro) |
+
+#### CTA — token theme-aware (acessibilidade de contraste de componente)
+
+O **CTA** (botão preenchido/sólido) é o único token de cor que muda de tom entre os temas **por acessibilidade de componente** (WCAG 1.4.11 — *Non-text Contrast*, ≥3:1 do botão vs. fundo). No tema escuro, o roxo `#644389` ficava com ~2.6:1 contra o fundo `#0A070E` e "apagava"; por isso o CTA escuro foi **clareado** para `#7C5EA7`. No tema claro, o CTA segue `#644389` (inalterado).
+
+| Token | Dark | Light | Uso |
+|---|---|---|---|
+| `--cta-grad` | `linear-gradient(120deg,#7C5EA7,#6E51A0)` | `linear-gradient(120deg,#644389,#3A274F)` | fundo do botão preenchido (`.b.fill`/`.fc-fill`) |
+| `--cta-solid` | `#7C5EA7` | `#644389` | fundo do botão sólido (`.b.solid`/`.fc-solid`) |
+| `--cta-solid-h` | `#6E51A0` | `#7C5EA7` | hover do sólido |
+| `--cta-ink` | `#fff` | `#fff` | texto sobre o CTA |
+
+> **Regra:** os botões fill/solid consomem **`--cta-*`**, nunca `--roxo2`/`--roxo-bright` direto. Trocar o tom do CTA é trocar só estes tokens (não toca na cor de marca). A marca roxa segue **inalterada**; `--roxo2 #644389` continua sendo a primária para seleção (linha/dia selecionado etc.).
 | `--lilas` | `#A289D7` | `#644389` | **accent interativo** (links, ativo, foco) |
 | `--lilas-soft` | `#B39EDE` | `#6E59A6` | accent hover |
 | `--logo` | `#FFFFFF` | `#644389` | cor do lockup SVG |
@@ -196,6 +209,8 @@ Montados só com cores do brand. Tipos: linear primário (`roxo2→roxo`), espec
 
 Classe base **`.b`** (drop-in: `.fc-btn`). Composição: `.b` + tamanho (`.sm`/`.md`/`.lg`) + variante (`.fill`/`.solid`/`.outline`/`.ghost`/`.gold`/`.gold-o`). Ícone interno: `.ico` (drop-in `.fc-ico`).
 
+> **CTA (fill/solid) lê `--cta-*`, não `--roxo2`/`--roxo-bright` direto.** `.b.fill`/`.fc-fill` usa `--cta-grad` + `--cta-ink`; `.b.solid`/`.fc-solid` usa `--cta-solid` (hover `--cta-solid-h`). O `--cta` é **theme-aware**: no escuro é roxo mais claro (`#7C5EA7`) para o botão passar contraste de componente (≥3:1 vs. fundo, WCAG 1.4.11); no claro fica `#644389` (inalterado). Ver "CTA — token theme-aware" na seção 2.3.
+
 ```css
 .b{display:inline-flex;align-items:center;justify-content:center;gap:9px;font-family:inherit;
    font-weight:600;border:none;cursor:pointer;text-decoration:none;border-radius:30px;
@@ -211,14 +226,14 @@ Classe base **`.b`** (drop-in: `.fc-btn`). Composição: `.b` + tamanho (`.sm`/`
 
 ### 4.2 Variantes e estados (hover/active)
 ```css
-/* Preenchido (gradiente + glow) */
-.b.fill{background:linear-gradient(120deg,var(--roxo2),var(--roxo));color:#fff;box-shadow:0 10px 30px var(--sh)}
+/* Preenchido (gradiente do CTA + glow) */
+.b.fill{background:var(--cta-grad);color:var(--cta-ink);box-shadow:0 10px 30px var(--sh)}
 .b.fill:hover{transform:translateY(-2px);box-shadow:0 16px 38px var(--sh-strong)}   /* sobe + glow cresce */
 .b.fill:active{box-shadow:0 6px 18px var(--sh)}                                      /* glow recua */
 
-/* Sólido */
-.b.solid{background:var(--roxo2);color:#fff}
-.b.solid:hover{background:var(--roxo-bright)}
+/* Sólido (CTA) */
+.b.solid{background:var(--cta-solid);color:var(--cta-ink)}
+.b.solid:hover{background:var(--cta-solid-h)}
 
 /* Contorno */
 .b.outline{background:transparent;color:var(--txt);border:1px solid var(--line)}
@@ -387,7 +402,12 @@ Tudo vanilla, sem dependências. Scripts no fim do `<body>`.
 
 ## 8. Acessibilidade ⭐
 
-- **Contraste WCAG 2.1 AA** medido nos 2 temas (texto normal ≥4.5:1; grande/UI ≥3:1). Verificado por sweep automatizado (compondo fundos semi-transparentes sobre o pai e desativando transições antes de medir). 0 falhas em dark e light.
+- **Contraste WCAG 2.1 AA em 2 níveis**, medido nos 2 temas:
+  - **Nível 1 — texto:** texto normal ≥4.5:1; texto grande ≥3:1 (WCAG 1.4.3).
+  - **Nível 2 — componente:** o próprio botão/controle (fundo do componente) vs. o fundo da página ≥3:1 (WCAG 1.4.11, *Non-text Contrast*).
+  - O **CTA do tema escuro foi clareado** para `#7C5EA7` exatamente para passar o **nível 2** (o `#644389` antigo dava ~2.6:1 contra o fundo escuro e reprovava 1.4.11). No tema claro o CTA segue `#644389`.
+
+  Verificado por sweep automatizado (compondo fundos semi-transparentes sobre o pai e desativando transições antes de medir). 0 falhas em dark e light, nos dois níveis.
 - **Foco visível:** outline 2px `--lilas` + `box-shadow:var(--focus)` (anel 3px); guard para `forced-colors` (`Highlight`).
 - **Cor nunca sozinha:** todo estado/semântica vem com ícone e/ou texto.
 - **Alvos de toque:** `--touch-min:44px` em botões, `.check`, `.toggle`; controles densos (pager 40, dia do calendário 38) compensam com espaçamento.
@@ -464,7 +484,7 @@ Mesma arquitetura, JS, componentes, escalas e semânticas. Mudam:
 | Sombra (matiz) | `rgba(100,67,137,…)` | `rgba(214,81,92,…)` |
 | Logo no nav | 24px | 30px (lockup com mais respiro) |
 
-**Cores institucionais da Corporal** (brandbook): `--brand-bordo #D6515C` · `--brand-coral #E88A92` · `--brand-amarelo #FFE4A4` · `--brand-vermelho #FFB1BD` · `--brand-amarelado #FFCA9B` · branco · preto. Superfícies/texto no tema são tingidos no bordô (ex.: dark `--bg #0E0708`, `--card #241619`, `--txt #FAF7F8`; light `--bg #FAFAFA`, `--card #FEF8F8`, `--txt #2A1517`). Semânticas success/warning/danger são **iguais** nas duas marcas.
+**Cores institucionais da Corporal**: `--brand-bordo #D6515C` · `--brand-coral #E88A92` · `--brand-amarelo #FFE4A4` · `--brand-vermelho #FFB1BD` · `--brand-amarelado #FFCA9B` · branco · preto. Superfícies/texto no tema são tingidos no bordô (ex.: dark `--bg #0E0708`, `--card #241619`, `--txt #FAF7F8`; light `--bg #FAFAFA`, `--card #FEF8F8`, `--txt #2A1517`). Semânticas success/warning/danger são **iguais** nas duas marcas.
 
 > Trocar de marca = trocar a linha de import (`facial-…`↔`corporal-…`) e o prefixo de classe. O resto do código é idêntico.
 

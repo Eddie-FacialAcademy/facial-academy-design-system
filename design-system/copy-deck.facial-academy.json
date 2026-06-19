@@ -1,5 +1,5 @@
 {
-  "meta": { "brand": "facial-academy", "lang": "pt-BR", "version": "1.0" },
+  "meta": { "brand": "facial-academy", "lang": "pt-BR", "version": "1.0.0" },
   "sections": {
     "hero": {
       "h1": "Pare de construir no escuro.",

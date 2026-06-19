@@ -1,6 +1,6 @@
 # Facial Academy — Design System
 
-**Versão 1.0** · Desenvolvido por **Edegar Junior** · Derivado do brandbook **Facial Academy 2022** (§3.3).
+**Versão 1.0.0** · Desenvolvido por **Edegar Junior**.
 
 Sistema de design portátil para web (HTML/CSS, React, Framer). Dark por padrão, light por troca de tema. Esta pasta é a **fonte da verdade** para aplicar a marca em qualquer projeto.
 
@@ -63,6 +63,16 @@ Importe `facial-academy-design-tokens.json` e gere variáveis no seu formato (CS
 <script>(function(){try{var t=localStorage.getItem('fc-theme');if(t!=='light'&&t!=='dark')t=matchMedia('(prefers-color-scheme: light)').matches?'light':'dark';document.documentElement.setAttribute('data-theme',t)}catch(e){document.documentElement.setAttribute('data-theme','dark')}})();</script>
 ```
 No light, **dourado e rosa como texto** usam variantes `-ink` (`--gold-ink`, `--rose-ink`); como preenchimento mantêm a cor institucional. A marca (`--logo`) é branca no dark e roxa no light.
+
+### CTA — token theme-aware (`--cta`)
+O CTA (botão preenchido/sólido) consome o token **`--cta`** em vez de `--roxo2`/`--roxo-bright` direto, para garantir **contraste de componente** (WCAG 1.4.11, ver Acessibilidade nível 2). Tokens: `--cta-grad` · `--cta-solid` · `--cta-solid-h` · `--cta-ink`.
+
+| Tema | `--cta-solid` | `--cta-grad` | hover (`--cta-solid-h`) | `--cta-ink` |
+|---|---|---|---|---|
+| **Escuro** | `#7C5EA7` (roxo mais claro) | `#7C5EA7 → #6E51A0` | `#6E51A0` | `#fff` |
+| **Claro** | `#644389` (inalterado) | a partir de `#644389` | — | `#fff` |
+
+No **tema escuro** o roxo do CTA é **mais claro** (`#7C5EA7`) de propósito: o valor antigo `#644389` "apagava" no fundo escuro (~2.6:1 vs fundo, reprovava o nível 2 de contraste). No **tema claro** o CTA permanece `#644389` com texto branco. A identidade roxa da marca é **inalterada** — só o CTA escuro foi clareado.
 
 ### Tokens de sistema
 - **Raio:** sm 8 · md 14 · lg 18 · pill 30
@@ -177,10 +187,11 @@ Somente cores do brand. **Não usar conic, blob nem halo** — preferir **meshes
 
 ### Botão — `fc-btn`
 `class="fc-btn <variante> <tamanho>"`
-- **Variantes:** `fc-fill` (gradiente roxo, primário) · `fc-solid` · `fc-outline` · `fc-ghost` (texto) · `fc-gold` · `fc-gold-o`
+- **Variantes:** `fc-fill` (gradiente do CTA, primário) · `fc-solid` · `fc-outline` · `fc-ghost` (texto) · `fc-gold` · `fc-gold-o`
 - **Tamanhos:** `fc-sm` · (md = padrão) · `fc-lg`
 - **Estados:** hover · `:active` · `:focus-visible` · `:disabled` / `[aria-disabled]`
 - **Regras:** altura mínima 44px, raio pill, ícone Phosphor opcional (`<svg class="fc-ico">`). Use `<button>` (não `<a>` sem href) para ser focável.
+- **CTA (preenchido/sólido) consome o token `--cta`, nunca `--roxo2`/`--roxo-bright` direto.** `.fc-btn.fc-fill` usa `--cta-grad` + `--cta-ink`; `.fc-btn.fc-solid` usa `--cta-solid` (hover `--cta-solid-h`). O `--cta` é **theme-aware** (ver "CTA — token theme-aware" nos Fundamentos): no escuro o roxo é **mais claro** para o botão passar contraste de componente (WCAG 1.4.11, ≥3:1 vs fundo); no claro fica `#644389` (inalterado).
 
 ### Status / feedback — `fc-status is-success|is-warning|is-danger|is-info`
 Sempre **ícone + texto**, nunca só cor. Verde/âmbar/vermelho saem da paleta de propósito (são funcionais).
@@ -191,7 +202,9 @@ Sempre **ícone + texto**, nunca só cor. Verde/âmbar/vermelho saem da paleta d
 ---
 
 ## Acessibilidade (obrigatório)
-- **Contraste WCAG AA:** texto ≥4.5:1, grande/UI ≥3:1. No light, dourado/rosa como texto = `-ink`.
+- **Contraste WCAG AA em 2 níveis:**
+  - **Nível 1 — texto:** ≥4.5:1 (texto normal) / ≥3:1 (texto grande). No light, dourado/rosa como texto = `-ink`.
+  - **Nível 2 — componente/borda (WCAG 1.4.11, Non-text Contrast):** o **botão/componente vs fundo** ≥3:1. Foi por isso que o **CTA escuro foi clareado** para `#7C5EA7` (o `#644389` antigo dava ~2.6:1 vs fundo escuro e reprovava o nível 2) — ver "CTA — token theme-aware".
 - **Foco visível:** `outline:2px solid var(--lilas)` + `box-shadow var(--focus)`; guard `@media (forced-colors: active)`.
 - **`prefers-reduced-motion`:** reduzir transições/animações.
 - **Toque ≥44px.** **Cor nunca sozinha** (estados com ícone+texto).

@@ -8,11 +8,15 @@ Vale para a web (HTML/CSS + tokens) e para o Framer.
 1. **Token-first.** Nunca use hex/raio/sombra solto — consuma os tokens. O token
    semântico **nunca sugere valor** (`--btn-bg`, não `--roxo-500`); o de componente
    referencia o semântico, nunca o primitivo direto.
-2. **Paridade dark/light + WCAG AA.** Toda cor de texto precisa passar contraste
-   (≥ 4.5:1 texto normal, ≥ 3:1 texto grande) nos **dois** temas. Cor nunca comunica
-   sozinha — sempre acompanhada de ícone ou texto.
+2. **Paridade dark/light + WCAG AA em dois níveis.** O contraste vale nos **dois**
+   temas em **dois níveis**: **(1) texto** ≥ 4.5:1 (texto grande ≥ 3:1); **(2)
+   componente/botão e estados** (incl. foco), elemento não-textual vs fundo ≥ 3:1
+   (WCAG 1.4.11, Non-text Contrast). Cor nunca comunica sozinha — sempre acompanhada
+   de ícone ou texto.
 3. **A11y by design.** Foco visível em tudo que é focável, navegação por teclado e
-   semântica HTML correta entram desde o início, não como auditoria depois.
+   semântica HTML correta entram desde o início, não como auditoria depois. O foco
+   visível e os contornos de componentes também cumprem o contraste de não-texto
+   ≥ 3:1 (WCAG 1.4.11), conforme o nível 2 do princípio de contraste.
 
 ## Quando algo vira padrão — regra das 3 equipes
 
@@ -24,7 +28,9 @@ Antes disso, é um padrão local. Isso evita inchar o sistema com peças de uso 
 Um componente só fecha quando tem **os quatro**:
 
 - **Design** — todos os estados, variantes e tamanhos.
-- **A11y** — teclado, foco e semântica.
+- **A11y** — teclado, foco e semântica, mais contraste nos **dois níveis** nos dois
+  temas: texto ≥ 4.5:1 e componente/botão (incl. foco) vs fundo ≥ 3:1 (WCAG 1.4.11).
+  Componentes como o CTA preenchido não fecham sem passar o nível 2.
 - **Código** — implementação consumindo tokens.
 - **Doc** — quando usar, quando não usar (do/don't) e exemplo.
 

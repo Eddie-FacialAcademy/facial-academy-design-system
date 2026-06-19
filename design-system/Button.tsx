@@ -24,6 +24,8 @@ export default function Button(props) {
         style,
     } = props
 
+    const [hover, setHover] = React.useState(false)
+
     const sizes = {
         sm: { fontSize: 13, padding: "10px 18px", gap: 7, ico: 15 },
         md: { fontSize: 15, padding: "14px 26px", gap: 9, ico: 18 },
@@ -34,23 +36,23 @@ export default function Button(props) {
     const variants: Record<string, React.CSSProperties> = {
         fill: {
             background:
-                "linear-gradient(120deg,var(--roxo2,#644389),var(--roxo,#3A274F))",
-            color: "#fff",
+                "var(--cta-grad, linear-gradient(120deg,#644389,#3A274F))",
+            color: "var(--cta-ink,#fff)",
             boxShadow: "0 10px 30px var(--sh,rgba(100,67,137,.40))",
         },
-        solid: { background: "var(--roxo2,#644389)", color: "#fff" },
+        solid: {
+            background:
+                hover && !disabled
+                    ? "var(--cta-solid-h,#6E51A0)"
+                    : "var(--cta-solid,#644389)",
+            color: "var(--cta-ink,#fff)",
+        },
         outline: {
             background: "transparent",
             color: "var(--txt,#F9F8FD)",
             border: "1px solid var(--line,rgba(162,137,215,.14))",
         },
         ghost: { background: "transparent", color: "var(--lilas,#A289D7)" },
-        gold: { background: "var(--gold,#FFE4A4)", color: "#140D1B" },
-        "gold-o": {
-            background: "transparent",
-            color: "var(--gold-ink,#FFE4A4)",
-            border: "1px solid var(--gold-line,rgba(255,228,164,.42))",
-        },
     }
 
     const base: React.CSSProperties = {
@@ -109,13 +111,21 @@ export default function Button(props) {
                 target={newTab ? "_blank" : undefined}
                 rel={newTab ? "noopener noreferrer" : undefined}
                 style={base}
+                onMouseEnter={() => setHover(true)}
+                onMouseLeave={() => setHover(false)}
             >
                 {content}
             </a>
         )
     }
     return (
-        <button type="button" style={base} disabled={disabled}>
+        <button
+            type="button"
+            style={base}
+            disabled={disabled}
+            onMouseEnter={() => setHover(true)}
+            onMouseLeave={() => setHover(false)}
+        >
             {content}
         </button>
     )
@@ -126,8 +136,8 @@ addPropertyControls(Button, {
     variant: {
         type: ControlType.Enum,
         title: "Variante",
-        options: ["fill", "solid", "outline", "ghost", "gold", "gold-o"],
-        optionTitles: ["Preenchido", "Sólido", "Contorno", "Inline", "Dourado", "Dourado contorno"],
+        options: ["fill", "solid", "outline", "ghost"],
+        optionTitles: ["Preenchido", "Sólido", "Contorno", "Inline"],
         defaultValue: "fill",
     },
     size: {
