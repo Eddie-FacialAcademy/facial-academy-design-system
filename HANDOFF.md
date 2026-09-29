@@ -1,4 +1,4 @@
-# Handoff: Facial Academy Design System (Versão 1.2.4 · estado em 2026-09-29)
+# Handoff: Facial Academy Design System (Versão 1.3.0 · estado em 2026-09-29)
 
 Desenvolvido por **Edegar Junior**. Ponto de retomada; atualizar conforme avançar.
 
@@ -16,12 +16,12 @@ Desenvolvido por **Edegar Junior**. Ponto de retomada; atualizar conforme avanç
 - CTA do **tema escuro** clareado para `#7C5EA7` via token `--cta` (corrige WCAG 1.4.11, contraste de componente) e adoção de acessibilidade em 2 níveis (texto ≥ 4.5:1; componente/botão ≥ 3:1). Registrado em `design-system/CHANGELOG.md`.
 
 ### Marca (roxo)
-- **Cor predominante:** roxo `#644389` (medium purple). Institucionais (7): roxo, lilás `#A289D7`, amarelo claro `#FFE4A4`, vermelho claro `#FFB1BD`, amarelado `#FFCA9B`, branco, preto.
+- **Cor predominante:** roxo `#644389` (medium purple). Institucionais (7): roxo, lilás `#A289D7`, dourado claro `#FFE4A4`, rosa claro `#FFB1BD`, pêssego `#FFCA9B`, branco, preto.
 - **Logos** Facial (4 composições) embutidos como `<symbol>` `currentColor` (seguem o tema: branco no dark, roxo no light).
 - **Tipografia** Silka: **headers em Medium (500)**; eyebrow 600; numeral 700; body 300.
 
 ### CTA theme-aware (token `--cta`)
-- O CTA (botão preenchido/sólido) é **theme-aware** via token `--cta`. Os botões `.b.fill` / `.fc-btn.fc-fill` (e sólido) passaram a usar `--cta` em vez de `--roxo2` / `--roxo-bright` diretamente, garantindo o CTA correto por tema.
+- O CTA (botão preenchido/sólido) é **theme-aware** via token `--cta`. Os botões `.b.fill` / `.fc-btn.fc-fill` (e sólido) passaram a usar `--cta` em vez de `--primary` / `--primary-bright` diretamente, garantindo o CTA correto por tema.
 - **Tema escuro:** CTA em **roxo mais claro** `#7C5EA7` (gradiente `#7C5EA7 → #7354A7`; hover `#7354A7`; texto branco). O `#644389` antigo "apagava" no fundo escuro (~2.6:1) e reprovava o contraste de componente (WCAG 1.4.11); por isso foi clareado.
 - **Tema claro:** CTA = `#644389` (**inalterado**; texto branco).
 - **Tokens:** `--cta-grad` / `--cta-solid` / `--cta-solid-h` / `--cta-ink`.

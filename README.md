@@ -22,7 +22,7 @@ Pacote para aplicar a marca em **qualquer projeto/ferramenta** (web, React, Fram
 
 ## Notas técnicas
 
-- **Cores:** derivadas das **7 cores institucionais** da Facial Academy: roxo `#644389`, lilás `#A289D7`, amarelo claro `#FFE4A4`, vermelho claro `#FFB1BD`, amarelado `#FFCA9B`, branco `#FFFFFF`, preto `#000000`.
+- **Cores:** derivadas das **7 cores institucionais** da Facial Academy: roxo `#644389`, lilás `#A289D7`, dourado claro `#FFE4A4`, rosa claro `#FFB1BD`, pêssego `#FFCA9B`, branco `#FFFFFF`, preto `#000000`.
 - **Tipografia:** Silka (institucional), embutida em base64/woff2; Poppins como fallback (quando a Silka não estiver disponível), depois system-ui. **Headers em Medium (500)**; eyebrow 600; numeral 700; body 300.
 - **Ícones:** biblioteca **Phosphor**, peso **Thin** (stroke 1pt na grade 24), `currentColor`.
 - **Tema:** dark por padrão; light via `data-theme="light"`; sem atributo segue `prefers-color-scheme`. Toggle persiste em `fc-theme`.
@@ -34,5 +34,6 @@ Repo público `facial-academy-design-system` (conta `Eddie-FacialAcademy`), bran
 
 ## CHANGELOG
 
+- **1.3.0**: nomes de cor organizados (cores da marca com o nome real, tokens de uso neutros e iguais em todos os DS, nomes antigos como apelidos até a 2.0), seção 13 como "Relação com o molde" e rótulos de gradiente com as cores reais.
 - **1.2.4**: CTA do tema escuro com fim do degradê e hover em `#7354A7` (botão 3.1:1 contra cartão e modal); dia selecionado do calendário em `--cta-solid`/`--cta-ink`; prévia de tema com o CTA real de cada tema; seletor de DS inclui a Facial Premium; versão alinhada em todos os arquivos.
 - **1.0.0**: CTA do tema escuro clareado para `#7C5EA7` (gradiente `#7C5EA7`→`#6E51A0`; hover `#6E51A0`; texto branco) via token `--cta` (`--cta-grad`/`--cta-solid`/`--cta-solid-h`/`--cta-ink`); botões `.b.fill`/`.fc-btn.fc-fill` e solid passam a usar `--cta`; documentada acessibilidade em 2 níveis (texto ≥4.5:1; componente ≥3:1, WCAG 1.4.11).

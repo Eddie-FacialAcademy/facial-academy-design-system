@@ -1,6 +1,6 @@
 # Facial Academy · Design System
 
-**Versão 1.2.4** · Desenvolvido por **Edegar Junior**.
+**Versão 1.3.0** · Desenvolvido por **Edegar Junior**.
 
 Sistema de design portátil para web (HTML/CSS, React, Framer). Dark por padrão, light por troca de tema. Esta pasta é a **fonte da verdade** para aplicar a marca em qualquer projeto.
 
@@ -54,7 +54,7 @@ Importe `facial-academy-design-tokens.json` e gere variáveis no seu formato (CS
 ## Fundamentos
 
 ### Cores institucionais (base: não inventar fora disto)
-`#644389` roxo · `#A289D7` lilás · `#FFE4A4` amarelo · `#FFB1BD` vermelho · `#FFCA9B` amarelado · `#FFFFFF` branco · `#000000` preto.
+`#644389` roxo · `#A289D7` lilás · `#FFE4A4` dourado claro · `#FFB1BD` rosa claro · `#FFCA9B` pêssego · `#FFFFFF` branco · `#000000` preto.
 
 ### Tema
 - **Dark é o padrão.** Light ativa com `data-theme="light"` no `<html>`; sem atributo, segue `prefers-color-scheme`.
@@ -62,10 +62,10 @@ Importe `facial-academy-design-tokens.json` e gere variáveis no seu formato (CS
 ```html
 <script>(function(){try{var t=localStorage.getItem('fc-theme');if(t!=='light'&&t!=='dark')t=matchMedia('(prefers-color-scheme: light)').matches?'light':'dark';document.documentElement.setAttribute('data-theme',t)}catch(e){document.documentElement.setAttribute('data-theme','dark')}})();</script>
 ```
-No light, **dourado e rosa como texto** usam variantes `-ink` (`--gold-ink`, `--rose-ink`); como preenchimento mantêm a cor institucional. A marca (`--logo`) é branca no dark e roxa no light.
+No light, **dourado e rosa como texto** usam variantes `-ink` (`--highlight-ink`, `--support-ink`); como preenchimento mantêm a cor institucional. A marca (`--logo`) é branca no dark e roxa no light.
 
 ### CTA: token theme-aware (`--cta`)
-O CTA (botão preenchido/sólido) consome o token **`--cta`** em vez de `--roxo2`/`--roxo-bright` direto, para garantir **contraste de componente** (WCAG 1.4.11, ver Acessibilidade nível 2). Tokens: `--cta-grad` · `--cta-solid` · `--cta-solid-h` · `--cta-ink`.
+O CTA (botão preenchido/sólido) consome o token **`--cta`** em vez de `--primary`/`--primary-bright` direto, para garantir **contraste de componente** (WCAG 1.4.11, ver Acessibilidade nível 2). Tokens: `--cta-grad` · `--cta-solid` · `--cta-solid-h` · `--cta-ink`.
 
 | Tema | `--cta-solid` | `--cta-grad` | hover (`--cta-solid-h`) | `--cta-ink` |
 |---|---|---|---|---|
@@ -187,11 +187,11 @@ Somente cores do brand. **Não usar conic, blob nem halo**; preferir **meshes** 
 
 ### Botão: `fc-btn`
 `class="fc-btn <variante> <tamanho>"`
-- **Variantes:** `fc-fill` (gradiente do CTA, primário) · `fc-solid` · `fc-outline` · `fc-ghost` (texto) · `fc-gold` · `fc-gold-o`
+- **Variantes:** `fc-fill` (gradiente do CTA, primário) · `fc-solid` · `fc-outline` · `fc-ghost` (texto) · `fc-highlight` · `fc-highlight-o`
 - **Tamanhos:** `fc-sm` · (md = padrão) · `fc-lg`
 - **Estados:** hover · `:active` · `:focus-visible` · `:disabled` / `[aria-disabled]`
 - **Regras:** altura mínima 44px, raio pill, ícone Phosphor opcional (`<svg class="fc-ico">`). Use `<button>` (não `<a>` sem href) para ser focável.
-- **CTA (preenchido/sólido) consome o token `--cta`, nunca `--roxo2`/`--roxo-bright` direto.** `.fc-btn.fc-fill` usa `--cta-grad` + `--cta-ink`; `.fc-btn.fc-solid` usa `--cta-solid` (hover `--cta-solid-h`). O `--cta` é **theme-aware** (ver "CTA: token theme-aware" nos Fundamentos): no escuro o roxo é **mais claro** para o botão passar contraste de componente (WCAG 1.4.11, ≥3:1 vs fundo); no claro fica `#644389` (inalterado).
+- **CTA (preenchido/sólido) consome o token `--cta`, nunca `--primary`/`--primary-bright` direto.** `.fc-btn.fc-fill` usa `--cta-grad` + `--cta-ink`; `.fc-btn.fc-solid` usa `--cta-solid` (hover `--cta-solid-h`). O `--cta` é **theme-aware** (ver "CTA: token theme-aware" nos Fundamentos): no escuro o roxo é **mais claro** para o botão passar contraste de componente (WCAG 1.4.11, ≥3:1 vs fundo); no claro fica `#644389` (inalterado).
 
 ### Status / feedback: `fc-status is-success|is-warning|is-danger|is-info`
 Sempre **ícone + texto**, nunca só cor. Verde/âmbar/vermelho saem da paleta de propósito (são funcionais).
@@ -205,7 +205,7 @@ Sempre **ícone + texto**, nunca só cor. Verde/âmbar/vermelho saem da paleta d
 - **Contraste WCAG AA em 2 níveis:**
   - **Nível 1, texto:** ≥4.5:1 (texto normal) / ≥3:1 (texto grande). No light, dourado/rosa como texto = `-ink`.
   - **Nível 2, componente/borda (WCAG 1.4.11, Non-text Contrast):** o **botão/componente vs fundo** ≥3:1. Foi por isso que o **CTA escuro foi clareado** para `#7C5EA7` (o `#644389` antigo dava ~2.6:1 vs fundo escuro e reprovava o nível 2); ver "CTA: token theme-aware".
-- **Foco visível:** `outline:2px solid var(--lilas)` + `box-shadow var(--focus)`; guard `@media (forced-colors: active)`.
+- **Foco visível:** `outline:2px solid var(--accent)` + `box-shadow var(--focus)`; guard `@media (forced-colors: active)`.
 - **`prefers-reduced-motion`:** reduzir transições/animações.
 - **Toque ≥44px.** **Cor nunca sozinha** (estados com ícone+texto).
 
