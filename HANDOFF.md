@@ -1,4 +1,4 @@
-# Handoff — Facial Academy Design System (Versão 1.0.0 · estado em 2026-06-11)
+# Handoff: Facial Academy Design System (Versão 1.2.4 · estado em 2026-09-29)
 
 Desenvolvido por **Edegar Junior**. Ponto de retomada; atualizar conforme avançar.
 
@@ -13,32 +13,32 @@ Desenvolvido por **Edegar Junior**. Ponto de retomada; atualizar conforme avanç
 - `silka.css` · `facial-academy-design-system.css` · `facial-academy-design-tokens.json` · `Button.tsx` · `THEME.md` · `DESIGN-SYSTEM.md`.
 
 ### CTA escuro mais claro + acessibilidade em 2 níveis
-- CTA do **tema escuro** clareado para `#7C5EA7` via token `--cta` (corrige WCAG 1.4.11 — contraste de componente) e adoção de acessibilidade em 2 níveis (texto ≥ 4.5:1; componente/botão ≥ 3:1). Registrado em `design-system/CHANGELOG.md`.
+- CTA do **tema escuro** clareado para `#7C5EA7` via token `--cta` (corrige WCAG 1.4.11, contraste de componente) e adoção de acessibilidade em 2 níveis (texto ≥ 4.5:1; componente/botão ≥ 3:1). Registrado em `design-system/CHANGELOG.md`.
 
 ### Marca (roxo)
 - **Cor predominante:** roxo `#644389` (medium purple). Institucionais (7): roxo, lilás `#A289D7`, amarelo claro `#FFE4A4`, vermelho claro `#FFB1BD`, amarelado `#FFCA9B`, branco, preto.
 - **Logos** Facial (4 composições) embutidos como `<symbol>` `currentColor` (seguem o tema: branco no dark, roxo no light).
-- **Tipografia** Silka — **headers em Medium (500)**; eyebrow 600; numeral 700; body 300.
+- **Tipografia** Silka: **headers em Medium (500)**; eyebrow 600; numeral 700; body 300.
 
 ### CTA theme-aware (token `--cta`)
 - O CTA (botão preenchido/sólido) é **theme-aware** via token `--cta`. Os botões `.b.fill` / `.fc-btn.fc-fill` (e sólido) passaram a usar `--cta` em vez de `--roxo2` / `--roxo-bright` diretamente, garantindo o CTA correto por tema.
-- **Tema escuro:** CTA em **roxo mais claro** `#7C5EA7` (gradiente `#7C5EA7 → #6E51A0`; hover `#6E51A0`; texto branco). O `#644389` antigo "apagava" no fundo escuro (~2.6:1) e reprovava o contraste de componente (WCAG 1.4.11); por isso foi clareado.
+- **Tema escuro:** CTA em **roxo mais claro** `#7C5EA7` (gradiente `#7C5EA7 → #7354A7`; hover `#7354A7`; texto branco). O `#644389` antigo "apagava" no fundo escuro (~2.6:1) e reprovava o contraste de componente (WCAG 1.4.11); por isso foi clareado.
 - **Tema claro:** CTA = `#644389` (**inalterado**; texto branco).
 - **Tokens:** `--cta-grad` / `--cta-solid` / `--cta-solid-h` / `--cta-ink`.
 
 ### Acessibilidade (2 níveis)
-- **Nível 1 — texto:** contraste ≥ 4.5:1.
-- **Nível 2 — componente/botão vs fundo:** contraste ≥ 3:1 (WCAG 1.4.11, Non-text Contrast).
+- **Nível 1, texto:** contraste ≥ 4.5:1.
+- **Nível 2, componente/botão vs fundo:** contraste ≥ 3:1 (WCAG 1.4.11, Non-text Contrast).
 - O CTA do tema escuro foi clareado para `#7C5EA7` justamente para passar o **nível 2** (Non-text Contrast). Ver entrada correspondente no `design-system/CHANGELOG.md`.
 
 ## Deploy / git (durável)
 - `.git` **fora do OneDrive**: `AppData\Local\gitdirs\` (fonte: `_online-design-system/`, espelho de `../index.html`).
 - **LF** travado (`.gitattributes`); `.gitignore` barra `desktop.ini`.
-- **Auth:** Git Credential Manager (Cofre do Windows) — push **silencioso, sem token**. Republicar: editar → `git add/commit/push`.
+- **Auth:** Git Credential Manager (Cofre do Windows); push **silencioso, sem token**. Republicar: editar → `git add/commit/push`.
 
 ## 🔜 Próximo (Framer)
-- A landing já está montada na `/facial-academy-v2` (Framer). Componentização em andamento — ver `../framer-api/FRAMER-BUILD-RECIPE.md` na pasta do projeto da landing.
-- Aplicar os Text Styles (L/M/S = 1200/810/390) e Color Styles a partir deste design system — ver `design-system/DESIGN-SYSTEM.md`.
+- A landing já está montada na `/facial-academy-v2` (Framer). Componentização em andamento; ver `../framer-api/FRAMER-BUILD-RECIPE.md` na pasta do projeto da landing.
+- Aplicar os Text Styles (L/M/S = 1200/810/390) e Color Styles a partir deste design system (ver `design-system/DESIGN-SYSTEM.md`).
 
 ## Arquivos-chave
 - Showcase: `index.html`

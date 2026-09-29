@@ -1,6 +1,6 @@
-# Facial Academy — Design System
+# Facial Academy · Design System
 
-**Versão 1.0.0** · Desenvolvido por **Edegar Junior**.
+**Versão 1.2.4** · Desenvolvido por **Edegar Junior**.
 
 Sistema de design portátil para web (HTML/CSS, React, Framer). Dark por padrão, light por troca de tema. Esta pasta é a **fonte da verdade** para aplicar a marca em qualquer projeto.
 
@@ -8,7 +8,7 @@ Sistema de design portátil para web (HTML/CSS, React, Framer). Dark por padrão
 
 | Arquivo | Para quê |
 |---|---|
-| `silka.css` | **Fonte Silka** (pesos 300–700) embutida em woff2/base64, self-contained. Linke **antes** do CSS principal. |
+| `silka.css` | **Fonte Silka** (pesos 300 a 700) embutida em woff2/base64, self-contained. Linke **antes** do CSS principal. |
 | `facial-academy-design-system.css` | **Drop-in.** Tokens (dark/light) + reset + foco + motion + tipografia + botões + chips/badges/status. Basta linkar. |
 | `facial-academy-design-tokens.json` | Tokens legíveis por máquina (Style Dictionary, Framer, plugins, agentes de IA). |
 | `Button.tsx` | Code Component Framer/React do botão, com Property Controls. |
@@ -26,7 +26,7 @@ Sistema de design portátil para web (HTML/CSS, React, Framer). Dark por padrão
 
 ## Como aplicar (3 caminhos)
 
-### 1. HTML/CSS — drop-in
+### 1. HTML/CSS: drop-in
 ```html
 <html lang="pt-BR">  <!-- dark por padrão; sem data-theme segue o sistema -->
 <head>
@@ -38,14 +38,14 @@ Sistema de design portátil para web (HTML/CSS, React, Framer). Dark por padrão
   <button class="fc-btn fc-fill">Assinar <svg class="fc-ico">…</svg></button>
 </body>
 ```
-A fonte **Silka** vem em `silka.css` (woff2 embutido, self-contained) — linke antes do CSS principal. Sem ela, cai em **Poppins** (fallback) e, por fim, `system-ui` — sem quebrar.
+A fonte **Silka** vem em `silka.css` (woff2 embutido, self-contained); linke antes do CSS principal. Sem ela, cai em **Poppins** (fallback) e, por fim, `system-ui`, sem quebrar.
 
-### 2. Qualquer stack — via tokens
+### 2. Qualquer stack: via tokens
 Importe `facial-academy-design-tokens.json` e gere variáveis no seu formato (CSS vars, JS, Tailwind theme, etc.). Regra de ouro: **componentes consomem tokens, nunca hex solto.**
 
 ### 3. Framer
-- Crie cada cor como **Color Style** com valor **Light** e **Dark** (tabela na seção 09 do brand-system.html, com click-to-copy).
-- Crie os **Text Styles** com **3 breakpoints (L/M/S)** — ver **"Framer — Text Styles responsivos"** na seção Tipografia (mecânica + valores exatos).
+- Crie cada cor como **Color Style** com valor **Light** e **Dark** (tabela na seção 14, Tokens para copiar, do `../index.html`, com click-to-copy).
+- Crie os **Text Styles** com **3 breakpoints (L/M/S)**; ver **"Framer: Text Styles responsivos"** na seção Tipografia (mecânica + valores exatos).
 - Importe o botão via `Button.tsx` (Code Component) ou recrie com as variantes.
 - Ícones: biblioteca **Phosphor**, peso **Thin**.
 
@@ -53,7 +53,7 @@ Importe `facial-academy-design-tokens.json` e gere variáveis no seu formato (CS
 
 ## Fundamentos
 
-### Cores institucionais (base — não inventar fora disto)
+### Cores institucionais (base: não inventar fora disto)
 `#644389` roxo · `#A289D7` lilás · `#FFE4A4` amarelo · `#FFB1BD` vermelho · `#FFCA9B` amarelado · `#FFFFFF` branco · `#000000` preto.
 
 ### Tema
@@ -64,15 +64,15 @@ Importe `facial-academy-design-tokens.json` e gere variáveis no seu formato (CS
 ```
 No light, **dourado e rosa como texto** usam variantes `-ink` (`--gold-ink`, `--rose-ink`); como preenchimento mantêm a cor institucional. A marca (`--logo`) é branca no dark e roxa no light.
 
-### CTA — token theme-aware (`--cta`)
+### CTA: token theme-aware (`--cta`)
 O CTA (botão preenchido/sólido) consome o token **`--cta`** em vez de `--roxo2`/`--roxo-bright` direto, para garantir **contraste de componente** (WCAG 1.4.11, ver Acessibilidade nível 2). Tokens: `--cta-grad` · `--cta-solid` · `--cta-solid-h` · `--cta-ink`.
 
 | Tema | `--cta-solid` | `--cta-grad` | hover (`--cta-solid-h`) | `--cta-ink` |
 |---|---|---|---|---|
-| **Escuro** | `#7C5EA7` (roxo mais claro) | `#7C5EA7 → #6E51A0` | `#6E51A0` | `#fff` |
-| **Claro** | `#644389` (inalterado) | a partir de `#644389` | — | `#fff` |
+| **Escuro** | `#7C5EA7` (roxo mais claro) | `#7C5EA7 → #7354A7` | `#7354A7` | `#fff` |
+| **Claro** | `#644389` (inalterado) | `#644389 → #3A274F` | `#7C5EA7` | `#fff` |
 
-No **tema escuro** o roxo do CTA é **mais claro** (`#7C5EA7`) de propósito: o valor antigo `#644389` "apagava" no fundo escuro (~2.6:1 vs fundo, reprovava o nível 2 de contraste). No **tema claro** o CTA permanece `#644389` com texto branco. A identidade roxa da marca é **inalterada** — só o CTA escuro foi clareado.
+No **tema escuro** o roxo do CTA é **mais claro** (`#7C5EA7`) de propósito: o valor antigo `#644389` "apagava" no fundo escuro (~2.6:1 vs fundo, reprovava o nível 2 de contraste). No **tema claro** o CTA permanece `#644389` com texto branco. A identidade roxa da marca é **inalterada**: só o CTA escuro foi clareado.
 
 ### Tokens de sistema
 - **Raio:** sm 8 · md 14 · lg 18 · pill 30
@@ -102,7 +102,7 @@ Pares: card grande 24/16→8 · médio 16/8→8 · pequeno 12/8→4 · tile 8/8�
 
 Regras: **padding ≥ raio** → interno 0 (reto); **borda/stroke** inverte (externo = interno + largura); **aninhamento profundo** subtrai o padding de cada nível; **pill** é exceção; com **corner smoothing/squircle** a fórmula vira aproximação (iguale o smoothing em pai e filho).
 
-### Tipografia — Silka (escala responsiva)
+### Tipografia: Silka (escala responsiva)
 `size = Desktop / Tablet / Phone (px)`
 
 | Estilo | D / T / P | Peso | LH |
@@ -120,15 +120,15 @@ Regras: **padding ≥ raio** → interno 0 (reto); **borda/stroke** inverte (ext
 | Numeral / Preço | 44 / 38 / 32 | 700 | 1 · tabular-nums |
 | Legal | 12 / 11 / 11 | 300 | 1.5 |
 
-No CSS use `clamp()` entre Phone e Desktop. Body **≥16px no mobile** (evita zoom no iOS). **Numerais sempre com `tabular-nums`** — ativado globalmente no `body` (dígitos de largura fixa, não encavalam: preços, stats, tabelas, contadores).
+No CSS use `clamp()` entre Phone e Desktop. Body **≥16px no mobile** (evita zoom no iOS). **Numerais sempre com `tabular-nums`**, ativado globalmente no `body` (dígitos de largura fixa, não encavalam: preços, stats, tabelas, contadores).
 
-#### Framer — Text Styles responsivos (L / M / S, desktop-first)
+#### Framer: Text Styles responsivos (L / M / S, desktop-first)
 
-O Facial Academy usa **3 breakpoints: L · M · S** (desktop-first). No editor: **L = Desktop ≥1200 (primário), M = Tablet 810–1199, S = Mobile 390–809**. Você edita o L e ele herda pra baixo; sobrescreve M/S onde precisar. **Tipografia não auto-escala** — os 3 tamanhos precisam existir no estilo.
+O Facial Academy usa **3 breakpoints: L · M · S** (desktop-first). No editor: **L = Desktop ≥1200 (primário), M = Tablet 810 a 1199, S = Mobile 390 a 809**. Você edita o L e ele herda pra baixo; sobrescreve M/S onde precisar. **Tipografia não auto-escala**: os 3 tamanhos precisam existir no estilo.
 
-**Editar à mão no editor (CONFIÁVEL — recomendado):** abra o estilo → painel *Breakpoints* → defina os 3 tamanhos. O Framer seta os `Min Width` certos (1200/810/390) sozinho e é WYSIWYG. O slot **S é a base** e seu Min Width fica **travado/cinza**; com só 3 tiers o Framer mostra o S como base — para o S exibir **390** explicitamente, existe um 4º tier (ver workaround).
+**Editar à mão no editor (CONFIÁVEL, recomendado):** abra o estilo → painel *Breakpoints* → defina os 3 tamanhos. O Framer seta os `Min Width` certos (1200/810/390) sozinho e é WYSIWYG. O slot **S é a base** e seu Min Width fica **travado/cinza**; com só 3 tiers o Framer mostra o S como base; para o S exibir **390** explicitamente, existe um 4º tier (ver workaround).
 
-> **⚠️ BUG da Server API `framer-api` (confirmado jun/2026, v0.1.14).** `TextStyle.setAttributes({ breakpoints })` **emparelha o `fontSize` com o `minWidth` errado — deslocado em 1 posição**. Lendo de volta (`style.breakpoints`) os dados parecem certos, mas o **editor renderiza os tamanhos rotacionados** (sintoma clássico: "o maior cai no M", "o S puxa o tamanho do L"). O objeto de Text Style **não** tem `getAttributes()` — leia pela propriedade `style.breakpoints` + o topo (`style.fontSize`/`style.minWidth` = tier primário).
+> **⚠️ BUG da Server API `framer-api` (confirmado jun/2026, v0.1.14).** `TextStyle.setAttributes({ breakpoints })` **emparelha o `fontSize` com o `minWidth` errado, deslocado em 1 posição**. Lendo de volta (`style.breakpoints`) os dados parecem certos, mas o **editor renderiza os tamanhos rotacionados** (sintoma clássico: "o maior cai no M", "o S puxa o tamanho do L"). O objeto de Text Style **não** tem `getAttributes()`; leia pela propriedade `style.breakpoints` + o topo (`style.fontSize`/`style.minWidth` = tier primário).
 
 **Mapa observado do bug** (como o editor exibe o que a API gravou):
 
@@ -141,7 +141,7 @@ O Facial Academy usa **3 breakpoints: L · M · S** (desktop-first). No editor: 
 
 (`bp[…]` = breakpoints ordenados do **maior pro menor** minWidth; o Framer reordena sozinho.)
 
-**Workaround via API (pré-compensação)** — desloca os tamanhos de propósito pra cancelar o bug. Para exibir **L=1200/L, M=810/M, S=390/S**:
+**Workaround via API (pré-compensação):** desloca os tamanhos de propósito pra cancelar o bug. Para exibir **L=1200/L, M=810/M, S=390/S**:
 
 ```js
 await style.setAttributes({
@@ -154,9 +154,9 @@ await style.setAttributes({
 })
 ```
 
-Resultado no editor: **L 1200/L · M 810/M · S 390/S · XS 0/S**. O XS@0 é duplicata do S — pode apagar no editor. (Script de referência: `framer-api/facial-bp-precomp.ts`.) Editar à mão depois é seguro — o editor normaliza.
+Resultado no editor: **L 1200/L · M 810/M · S 390/S · XS 0/S**. O XS@0 é duplicata do S e pode ser apagado no editor. Editar à mão depois é seguro: o editor normaliza.
 
-Valores oficiais (px) — gravados no projeto Facial Academy:
+Valores oficiais (px), gravados no projeto Facial Academy:
 
 | Estilo | L (1200) | M (810) | S (390) | LH |
 |---|---|---|---|---|
@@ -179,21 +179,21 @@ Valores oficiais (px) — gravados no projeto Facial Academy:
 Biblioteca **Phosphor**, peso **Thin** (traço de **1pt** / `stroke-width:1` na grade 24), cor por `currentColor`. Tamanhos: 16 / 20 / 24 / 32 / 48. Nunca emoji como ícone.
 
 ### Gradientes
-Somente cores do brand. **Não usar conic, blob nem halo** — preferir **meshes** (radiais multiponto) e lineares. Variantes light sobre base branca. Biblioteca completa no brand-system.html.
+Somente cores do brand. **Não usar conic, blob nem halo**; preferir **meshes** (radiais multiponto) e lineares. Variantes light sobre base branca. Biblioteca completa no `../index.html` (seção 03, Gradientes).
 
 ---
 
 ## Componentes
 
-### Botão — `fc-btn`
+### Botão: `fc-btn`
 `class="fc-btn <variante> <tamanho>"`
 - **Variantes:** `fc-fill` (gradiente do CTA, primário) · `fc-solid` · `fc-outline` · `fc-ghost` (texto) · `fc-gold` · `fc-gold-o`
 - **Tamanhos:** `fc-sm` · (md = padrão) · `fc-lg`
 - **Estados:** hover · `:active` · `:focus-visible` · `:disabled` / `[aria-disabled]`
 - **Regras:** altura mínima 44px, raio pill, ícone Phosphor opcional (`<svg class="fc-ico">`). Use `<button>` (não `<a>` sem href) para ser focável.
-- **CTA (preenchido/sólido) consome o token `--cta`, nunca `--roxo2`/`--roxo-bright` direto.** `.fc-btn.fc-fill` usa `--cta-grad` + `--cta-ink`; `.fc-btn.fc-solid` usa `--cta-solid` (hover `--cta-solid-h`). O `--cta` é **theme-aware** (ver "CTA — token theme-aware" nos Fundamentos): no escuro o roxo é **mais claro** para o botão passar contraste de componente (WCAG 1.4.11, ≥3:1 vs fundo); no claro fica `#644389` (inalterado).
+- **CTA (preenchido/sólido) consome o token `--cta`, nunca `--roxo2`/`--roxo-bright` direto.** `.fc-btn.fc-fill` usa `--cta-grad` + `--cta-ink`; `.fc-btn.fc-solid` usa `--cta-solid` (hover `--cta-solid-h`). O `--cta` é **theme-aware** (ver "CTA: token theme-aware" nos Fundamentos): no escuro o roxo é **mais claro** para o botão passar contraste de componente (WCAG 1.4.11, ≥3:1 vs fundo); no claro fica `#644389` (inalterado).
 
-### Status / feedback — `fc-status is-success|is-warning|is-danger|is-info`
+### Status / feedback: `fc-status is-success|is-warning|is-danger|is-info`
 Sempre **ícone + texto**, nunca só cor. Verde/âmbar/vermelho saem da paleta de propósito (são funcionais).
 
 ### Outros
@@ -203,8 +203,8 @@ Sempre **ícone + texto**, nunca só cor. Verde/âmbar/vermelho saem da paleta d
 
 ## Acessibilidade (obrigatório)
 - **Contraste WCAG AA em 2 níveis:**
-  - **Nível 1 — texto:** ≥4.5:1 (texto normal) / ≥3:1 (texto grande). No light, dourado/rosa como texto = `-ink`.
-  - **Nível 2 — componente/borda (WCAG 1.4.11, Non-text Contrast):** o **botão/componente vs fundo** ≥3:1. Foi por isso que o **CTA escuro foi clareado** para `#7C5EA7` (o `#644389` antigo dava ~2.6:1 vs fundo escuro e reprovava o nível 2) — ver "CTA — token theme-aware".
+  - **Nível 1, texto:** ≥4.5:1 (texto normal) / ≥3:1 (texto grande). No light, dourado/rosa como texto = `-ink`.
+  - **Nível 2, componente/borda (WCAG 1.4.11, Non-text Contrast):** o **botão/componente vs fundo** ≥3:1. Foi por isso que o **CTA escuro foi clareado** para `#7C5EA7` (o `#644389` antigo dava ~2.6:1 vs fundo escuro e reprovava o nível 2); ver "CTA: token theme-aware".
 - **Foco visível:** `outline:2px solid var(--lilas)` + `box-shadow var(--focus)`; guard `@media (forced-colors: active)`.
 - **`prefers-reduced-motion`:** reduzir transições/animações.
 - **Toque ≥44px.** **Cor nunca sozinha** (estados com ícone+texto).
@@ -215,7 +215,7 @@ Sempre **ícone + texto**, nunca só cor. Verde/âmbar/vermelho saem da paleta d
 
 ---
 
-## Processo & versionamento
+## Processo e versionamento
 
 O sistema evolui sob governança: veja **`CONTRIBUTING.md`** (princípios, regra das 3 equipes, gate de "pronto", SemVer e depreciação) e o **`CHANGELOG.md`** (histórico de versões). Regra de ouro dos tokens: `primitive → semantic/intent → component`, e o token semântico **nunca sugere valor**.
 
@@ -226,5 +226,5 @@ O sistema evolui sob governança: veja **`CONTRIBUTING.md`** (princípios, regra
 Ao aplicar este design system em um projeto, **leia `facial-academy-design-tokens.json`** e siga as regras acima. Prompt sugerido:
 
 > Você vai aplicar o **Facial Academy Design System** (autor: Edegar Junior). Fonte da verdade: `facial-academy-design-tokens.json` + `facial-academy-design-system.css` desta pasta.
-> Regras inegociáveis: (1) só use as 7 cores institucionais e seus derivados — nada de hex fora da paleta; (2) componha tudo com os tokens (nunca hex solto); (3) entregue **dark e light** com paridade, dark por padrão e light via `data-theme="light"`; (4) tipografia **Silka** com a escala responsiva por breakpoint (Desktop/Tablet/Phone) usando `clamp()`, body ≥16px no mobile; (5) ícones **Phosphor peso Thin** com `currentColor`; (6) gradientes **só meshes/lineares do brand — sem conic/blob/halo**; (7) acessibilidade WCAG AA: foco visível, `prefers-reduced-motion`, toque ≥44px, cor nunca sozinha; (8) botão = `<button>` com as variantes `fc-*`.
+> Regras inegociáveis: (1) só use as 7 cores institucionais e seus derivados, nada de hex fora da paleta; (2) componha tudo com os tokens (nunca hex solto); (3) entregue **dark e light** com paridade, dark por padrão e light via `data-theme="light"`; (4) tipografia **Silka** com a escala responsiva por breakpoint (Desktop/Tablet/Phone) usando `clamp()`, body ≥16px no mobile; (5) ícones **Phosphor peso Thin** com `currentColor`; (6) gradientes **só meshes/lineares do brand, sem conic/blob/halo**; (7) acessibilidade WCAG AA: foco visível, `prefers-reduced-motion`, toque ≥44px, cor nunca sozinha; (8) botão = `<button>` com as variantes `fc-*`.
 > Antes de finalizar, verifique contraste nos dois temas e ausência de scroll horizontal de 320px a 1440px.
